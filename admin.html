@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel — Ronycar Automóveis</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="container topo-inner">
+      <span class="marca"><img class="logo" src="assets/img/logo.png" alt="Ronycar Automóveis"> <span class="painel-tag">Painel</span></span>
+      <button id="sair" class="link-sair" type="button" hidden>Sair</button>
+    </div>
+  </header>
+
+  <!-- Login -->
+  <section id="login" class="container login-wrap" hidden>
+    <form id="form-login" class="login-card">
+      <h1>Entrar no painel</h1>
+      <label>E-mail<input name="email" type="email" required autocomplete="username"></label>
+      <label>Senha<input name="senha" type="password" required autocomplete="current-password"></label>
+      <p id="login-erro" class="erro" hidden></p>
+      <button class="btn" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <!-- Painel (preenchido pela Task 10) -->
+  <main id="painel" class="container painel" hidden>
+    <div class="painel-grid">
+      <section class="painel-col">
+        <div class="painel-head">
+          <h2 id="estoque-titulo">Estoque</h2>
+          <button id="novo" class="btn" type="button">+ Adicionar veículo</button>
+        </div>
+        <div id="lista" class="lista"></div>
+      </section>
+      <section class="painel-col">
+        <h2 id="form-titulo">Novo veículo</h2>
+        <div id="form-veiculo"></div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

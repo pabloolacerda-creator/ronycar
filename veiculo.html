@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Veículo — Ronycar Automóveis</title>
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="container topo-inner">
+      <a class="marca" href="index.html"><img class="logo" src="assets/img/logo.png" alt="Ronycar Automóveis"></a>
+      <a class="nav-voltar" href="index.html">← Voltar ao estoque</a>
+    </div>
+  </header>
+
+  <main class="container anuncio">
+    <p id="erro" class="vazio" hidden></p>
+
+    <div id="conteudo" class="anuncio-grid" hidden>
+      <div id="carrossel"></div>
+
+      <div class="anuncio-info">
+        <span id="status" class="badge"></span>
+        <h1 id="titulo"></h1>
+        <p id="subtitulo" class="sub"></p>
+        <p id="preco" class="preco-grande"></p>
+        <div id="specs" class="specs"></div>
+        <a id="wpp" class="btn-wpp" target="_blank" rel="noopener">Falar com vendedor no WhatsApp</a>
+      </div>
+
+      <section class="anuncio-desc">
+        <h2>Descrição</h2>
+        <p id="descricao"></p>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="assets/js/anuncio.js"></script>
+</body>
+</html>

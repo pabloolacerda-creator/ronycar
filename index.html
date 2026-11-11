@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ronycar Automóveis — Estoque</title>
+  <meta name="description" content="Carros, caminhões, máquinas e motos em Várzea Grande/MT. Veja o estoque da Ronycar Automóveis e fale com um vendedor.">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="container topo-inner">
+      <a class="marca" href="index.html"><img class="logo" src="assets/img/logo.png" alt="Ronycar Automóveis"></a>
+      <nav class="nav"><a href="#estoque">Estoque</a></nav>
+    </div>
+  </header>
+
+  <section class="banner">
+    <div class="banner-ov">
+      <div class="container">
+        <h1>Encontre seu próximo veículo</h1>
+        <p>Carros, caminhões, máquinas e motos — Várzea Grande/MT</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero">
+    <div class="container">
+      <form id="busca" class="busca">
+        <select name="tipo" aria-label="Tipo">
+          <option value="">Tipo</option>
+          <option>Carro</option><option>Caminhão</option><option>Máquina</option><option>Moto</option>
+        </select>
+        <input name="texto" type="search" placeholder="Veículo (marca ou modelo)" aria-label="Veículo">
+        <select name="faixa" aria-label="Valor médio">
+          <option value="">Valor médio</option>
+          <option value="ate-50k">Até R$ 50 mil</option>
+          <option value="50-100k">R$ 50 a 100 mil</option>
+          <option value="100-200k">R$ 100 a 200 mil</option>
+          <option value="200k-mais">Acima de R$ 200 mil</option>
+        </select>
+        <input name="motorizacao" type="search" placeholder="Motorização" aria-label="Motorização">
+        <select name="ano" id="filtro-ano" aria-label="Ano"><option value="">Ano</option></select>
+        <select name="cambio" aria-label="Câmbio">
+          <option value="">Câmbio</option>
+          <option>Automático</option><option>Manual</option>
+        </select>
+        <button class="btn busca-btn" type="submit">Encontrar</button>
+      </form>
+    </div>
+  </section>
+
+  <main id="estoque" class="container">
+    <div id="grade" class="grade" aria-live="polite"></div>
+    <p id="carregando" class="vazio">Carregando veículos…</p>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">Ronycar Automóveis · Várzea Grande/MT</div>
+  </footer>
+
+  <script type="module" src="assets/js/vitrine.js"></script>
+</body>
+</html>

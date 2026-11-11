@@ -115,10 +115,10 @@ button, input, select, textarea {
 .topo { background: var(--superficie); border-bottom: 1px solid var(--borda); }
 .topo-inner { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
 .topo .marca { font-size: 18px; }
-.nav { display: flex; align-items: center; gap: 14px; }
+.nav { display: flex; align-items: center; gap: 20px; }
 .nav a { color: var(--grafite-2); font-size: 14px; font-weight: 600; }
-.btn-login { background: var(--azul); color: #fff !important; font-weight: 700; padding: 8px 16px; border-radius: 8px; }
-.btn-login:hover { background: var(--azul-escuro); }
+.btn-login { background: #374151; color: #fff !important; font-weight: 700; padding: 9px 18px; border-radius: 8px; letter-spacing: .02em; }
+.btn-login:hover { background: #2a303b; }
 
 /* ===== Banner da fachada ===== */
 .banner {

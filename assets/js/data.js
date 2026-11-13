@@ -2,6 +2,7 @@
 // para os testes usarem um client falso sem rede.
 
 import { sortPhotos } from './photos.js';
+import { ordenarFeed } from './destaque.js';
 
 const SELECT = '*, veiculo_fotos(*)';
 
@@ -14,7 +15,7 @@ export async function listVeiculos(client, { onlyDisponivel = true } = {}) {
   if (onlyDisponivel) q = q.eq('status', 'Disponível');
   const { data, error } = await q;
   if (error) throw error;
-  return (data ?? []).map(normalize);
+  return ordenarFeed((data ?? []).map(normalize));
 }
 
 export async function getVeiculo(client, id) {

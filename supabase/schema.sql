@@ -69,3 +69,6 @@ create policy "fotos storage update autenticada"
 create policy "fotos storage delete autenticada"
   on storage.objects for delete
   using (bucket_id = 'fotos' and auth.role() = 'authenticated');
+
+-- ========== 2026-11-13: posição no feed (1º, 2º, 3º) ==========
+alter table public.veiculos add column if not exists destaque int check (destaque in (1,2,3));

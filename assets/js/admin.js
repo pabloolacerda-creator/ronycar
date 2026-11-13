@@ -6,6 +6,7 @@ import { initAdminAuth } from './auth.js';
 import { listVeiculos } from './data.js';
 import { coverPhoto } from './photos.js';
 import { formatPrice } from './format.js';
+import { POSICOES, reposicionar } from './destaque.js';
 
 const TIPOS = ['Carro', 'Caminhão', 'Máquina', 'Moto'];
 const CAMBIOS = ['Automático', 'Manual', 'Não se aplica'];
@@ -68,7 +69,7 @@ function itemHtml(v) {
     <div>
       <div class="item-nome">${v.titulo}</div>
       <div class="item-meta">${[v.ano, formatPrice(v.preco)].filter(Boolean).join(' · ')}
-        <span class="st ${vendido ? 'st-off' : 'st-on'}">${v.status}</span></div>
+        <span class="st ${vendido ? 'st-off' : 'st-on'}">${v.status}</span>${v.destaque ? ` <span class="st st-pos">${v.destaque}º no feed</span>` : ''}</div>
     </div>
     <div class="item-acoes">
       <button data-acao="editar">Editar</button>
@@ -90,7 +91,9 @@ listaEl.addEventListener('click', (e) => {
 
 async function alternarVendido(v) {
   const novo = v.status === 'Vendido' ? 'Disponível' : 'Vendido';
-  const { error } = await supabase.from('veiculos').update({ status: novo, updated_at: new Date().toISOString() }).eq('id', v.id);
+  const mud = { status: novo, updated_at: new Date().toISOString() };
+  if (novo === 'Vendido') mud.destaque = null; // vendido sai do destaque
+  const { error } = await supabase.from('veiculos').update(mud).eq('id', v.id);
   if (error) return alert('Erro ao atualizar status.');
   await carregarLista();
 }
@@ -137,6 +140,10 @@ function construirForm(v = {}) {
     </div>
     <label>Motorização<input name="motorizacao" value="${v.motorizacao ?? ''}"></label>
     <label>Descrição<textarea name="descricao" rows="3">${v.descricao ?? ''}</textarea></label>
+    <label>Posição no feed<select name="destaque">
+      <option value="">Normal</option>
+      ${POSICOES.map((p) => `<option value="${p}"${v.destaque === p ? ' selected' : ''}>${p}º</option>`).join('')}
+    </select></label>
     <label>Status<select name="status">${opcoes(['Disponível', 'Vendido'], v.status || 'Disponível')}</select></label>
     <button class="btn" type="submit">Salvar e publicar</button>
   </form>`;
@@ -227,6 +234,8 @@ async function salvar(e) {
     status: f.status || 'Disponível',
     updated_at: new Date().toISOString(),
   };
+  // Vendido não fica em destaque.
+  const destaque = payload.status === 'Vendido' ? null : (f.destaque ? Number(f.destaque) : null);
 
   const btn = e.target.querySelector('button[type="submit"]');
   btn.disabled = true;
@@ -256,6 +265,15 @@ async function salvar(e) {
       const rows = fotosState.map((ft, i) => ({ veiculo_id: id, url: ft.url, ordem: i }));
       const { error } = await supabase.from('veiculo_fotos').insert(rows);
       if (error) throw error;
+    }
+
+    // Posição no feed: grava a do veículo e empurra quem estava no lugar.
+    const atual = veiculos.find((x) => x.id === id)?.destaque ?? null;
+    if (destaque !== atual) {
+      for (const m of reposicionar(veiculos, id, destaque)) {
+        const { error } = await supabase.from('veiculos').update({ destaque: m.destaque }).eq('id', m.id);
+        if (error) throw error;
+      }
     }
 
     if (removidas.length) {

@@ -122,7 +122,7 @@ button, input, select, textarea {
 
 /* ===== Banner da fachada ===== */
 .banner {
-  background: #0f1116 url('../img/fachada.jpg') center/cover no-repeat;
+  background: #0f1116 url('../img/fachada.jpg?v=2') 56% center/cover no-repeat;
 }
 .banner-ov {
   background: linear-gradient(95deg, rgba(10,14,30,.82) 0%, rgba(10,14,30,.45) 55%, rgba(10,14,30,.12) 100%);
@@ -265,6 +265,7 @@ button, input, select, textarea {
 .st { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
 .st-on { background: #e4f6ec; color: var(--verde-texto); }
 .st-off { background: #fdeaea; color: var(--vermelho-texto); }
+.st-pos { background: #e6ecfd; color: var(--azul, #2643d9); }
 
 .form-veiculo { display: grid; gap: 11px; background: var(--superficie); border: 1px solid var(--borda); border-radius: 12px; padding: 16px; }
 .form-veiculo label { display: grid; gap: 5px; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--cinza); font-weight: 700; }

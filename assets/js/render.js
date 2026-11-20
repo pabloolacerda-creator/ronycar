@@ -18,6 +18,7 @@ export function renderCard(veiculo) {
   const foto = capa
     ? `<img class="card-foto" src="${esc(capa.url)}" alt="${esc(veiculo.titulo)}" loading="lazy">`
     : `<div class="card-foto placeholder">sem foto</div>`;
+  const seta = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>';
 
   const meta = [veiculo.ano, vazio(veiculo.km) ? null : formatKm(veiculo.km), veiculo.combustivel]
     .filter((x) => !vazio(x))
@@ -25,11 +26,14 @@ export function renderCard(veiculo) {
     .join(' · ');
 
   return `<a class="card" href="veiculo.html?id=${encodeURIComponent(veiculo.id)}">
-  ${foto}
+  <div class="card-midia">${foto}</div>
   <div class="card-corpo">
     <h3 class="card-titulo">${esc(veiculo.titulo)}</h3>
     <p class="card-meta">${meta}</p>
-    <p class="card-preco">${formatPrice(veiculo.preco)}</p>
+    <div class="card-rodape">
+      <p class="card-preco">${formatPrice(veiculo.preco)}</p>
+      <span class="card-ver">Ver ${seta}</span>
+    </div>
   </div>
 </a>`;
 }
@@ -64,8 +68,8 @@ export function renderCarousel(fotos) {
 
   return `<div class="carrossel" data-total="${ordenadas.length}">
   <div class="slides">${slides}</div>
-  <button class="seta seta-prev" type="button" aria-label="Foto anterior">‹</button>
-  <button class="seta seta-next" type="button" aria-label="Próxima foto">›</button>
+  <button class="seta seta-prev" type="button" aria-label="Foto anterior"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="seta seta-next" type="button" aria-label="Próxima foto"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
   <div class="contador"><span class="atual">1</span> / ${ordenadas.length}</div>
   <div class="bolinhas">${bolinhas}</div>
 </div>`;

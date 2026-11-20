@@ -5,7 +5,7 @@
 
 create table if not exists public.veiculos (
   id          uuid primary key default gen_random_uuid(),
-  tipo        text not null check (tipo in ('Carro','Caminhão','Máquina','Moto')),
+  tipo        text not null check (tipo in ('Carro','Caminhão','Máquina','Moto','Náutica/Outros')),
   titulo      text not null,
   ano         int,
   preco       numeric,
@@ -72,3 +72,8 @@ create policy "fotos storage delete autenticada"
 
 -- ========== 2026-11-13: posição no feed (1º, 2º, 3º) ==========
 alter table public.veiculos add column if not exists destaque int check (destaque in (1,2,3));
+
+-- ========== 2026-11-16: tipo Náutica/Outros (jet ski, quadriciclo) ==========
+alter table public.veiculos drop constraint if exists veiculos_tipo_check;
+alter table public.veiculos add constraint veiculos_tipo_check
+  check (tipo in ('Carro','Caminhão','Máquina','Moto','Náutica/Outros'));

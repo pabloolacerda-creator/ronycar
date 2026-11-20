@@ -6,6 +6,9 @@
   <title>Ronycar Automóveis — Estoque</title>
   <meta name="description" content="Carros, caminhões, máquinas e motos em Várzea Grande/MT. Veja o estoque da Ronycar Automóveis e fale com um vendedor.">
   <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,100..125,400..800;1,100..125,400..800&display=swap">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
@@ -32,32 +35,48 @@
           <option value="">Tipo</option>
           <option>Carro</option><option>Caminhão</option><option>Máquina</option><option>Moto</option><option>Náutica/Outros</option>
         </select>
-        <input name="texto" type="search" placeholder="Veículo (marca ou modelo)" aria-label="Veículo">
-        <select name="faixa" aria-label="Valor médio">
+        <input name="texto" class="f-texto" type="search" placeholder="Veículo (marca ou modelo)" aria-label="Veículo">
+        <select name="faixa" class="extra" aria-label="Valor médio">
           <option value="">Valor médio</option>
           <option value="ate-50k">Até R$ 50 mil</option>
           <option value="50-100k">R$ 50 a 100 mil</option>
           <option value="100-200k">R$ 100 a 200 mil</option>
           <option value="200k-mais">Acima de R$ 200 mil</option>
         </select>
-        <input name="motorizacao" type="search" placeholder="Motorização" aria-label="Motorização">
-        <select name="ano" id="filtro-ano" aria-label="Ano"><option value="">Ano</option></select>
-        <select name="cambio" aria-label="Câmbio">
+        <input name="motorizacao" class="extra" type="search" placeholder="Motorização" aria-label="Motorização">
+        <select name="ano" id="filtro-ano" class="extra" aria-label="Ano"><option value="">Ano</option></select>
+        <select name="cambio" class="extra" aria-label="Câmbio">
           <option value="">Câmbio</option>
           <option>Automático</option><option>Manual</option>
         </select>
-        <button class="btn busca-btn" type="submit">Encontrar</button>
+        <button class="busca-mais" type="button" aria-expanded="false" aria-controls="busca">Mais filtros <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="btn busca-btn" type="submit"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Encontrar</button>
       </form>
     </div>
   </section>
 
   <main id="estoque" class="container">
-    <div id="grade" class="grade" aria-live="polite"></div>
-    <p id="carregando" class="vazio">Carregando veículos…</p>
+    <div class="estoque-head">
+      <h2>Estoque</h2>
+      <p id="contagem" class="contagem" aria-live="polite">Carregando veículos…</p>
+      <button id="limpar" class="limpar" type="button" hidden>Limpar filtros</button>
+    </div>
+    <div id="grade" class="grade">
+      <div class="card esqueleto" aria-hidden="true"><div class="card-midia"></div><div class="card-corpo"><div class="linha"></div><div class="linha curta"></div><div class="linha preco"></div></div></div>
+      <div class="card esqueleto" aria-hidden="true"><div class="card-midia"></div><div class="card-corpo"><div class="linha"></div><div class="linha curta"></div><div class="linha preco"></div></div></div>
+      <div class="card esqueleto" aria-hidden="true"><div class="card-midia"></div><div class="card-corpo"><div class="linha"></div><div class="linha curta"></div><div class="linha preco"></div></div></div>
+      <div class="card esqueleto" aria-hidden="true"><div class="card-midia"></div><div class="card-corpo"><div class="linha"></div><div class="linha curta"></div><div class="linha preco"></div></div></div>
+      <div class="card esqueleto" aria-hidden="true"><div class="card-midia"></div><div class="card-corpo"><div class="linha"></div><div class="linha curta"></div><div class="linha preco"></div></div></div>
+      <div class="card esqueleto" aria-hidden="true"><div class="card-midia"></div><div class="card-corpo"><div class="linha"></div><div class="linha curta"></div><div class="linha preco"></div></div></div>
+    </div>
+    <p id="carregando" class="vazio" hidden></p>
   </main>
 
   <footer class="rodape">
-    <div class="container">Ronycar Automóveis · Várzea Grande/MT</div>
+    <div class="container rodape-inner">
+      <div class="rodape-marca"><img src="assets/img/logo.png" alt="Ronycar Automóveis"><p>Várzea Grande/MT</p></div>
+      <a class="rodape-wpp" href="https://wa.me/5565999767262" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>WhatsApp (65) 99976-7262</a>
+    </div>
   </footer>
 
   <script type="module" src="assets/js/vitrine.js"></script>

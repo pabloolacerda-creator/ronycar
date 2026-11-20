@@ -59,7 +59,7 @@ function preencher(veiculo) {
 
   const status = document.getElementById('status');
   const vendido = veiculo.status === 'Vendido';
-  status.textContent = vendido ? '● Vendido' : '● Disponível';
+  status.textContent = vendido ? 'Vendido' : 'Disponível';
   status.classList.add(vendido ? 'badge-off' : 'badge-on');
 
   document.getElementById('titulo').textContent = veiculo.titulo;

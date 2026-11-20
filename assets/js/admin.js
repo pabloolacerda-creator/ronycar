@@ -8,7 +8,7 @@ import { coverPhoto } from './photos.js';
 import { formatPrice } from './format.js';
 import { POSICOES, reposicionar } from './destaque.js';
 
-const TIPOS = ['Carro', 'Caminhão', 'Máquina', 'Moto'];
+const TIPOS = ['Carro', 'Caminhão', 'Máquina', 'Moto', 'Náutica/Outros'];
 const CAMBIOS = ['Automático', 'Manual', 'Não se aplica'];
 const COMBUSTIVEIS = ['Flex', 'Gasolina', 'Diesel', 'Elétrico', 'GNV', 'Não se aplica'];
 

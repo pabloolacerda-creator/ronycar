@@ -9,13 +9,23 @@ const grade = document.getElementById('grade');
 const carregando = document.getElementById('carregando');
 const form = document.getElementById('busca');
 const filtroAno = document.getElementById('filtro-ano');
+const contagem = document.getElementById('contagem');
+const limpar = document.getElementById('limpar');
+const maisFiltros = form.querySelector('.busca-mais');
 
 let veiculos = [];
 
-function render(lista) {
+function rotulo(n) {
+  if (n === 0) return 'Nenhum veículo';
+  return n === 1 ? '1 veículo' : `${n} veículos`;
+}
+
+function render(lista, filtrado = false) {
+  contagem.textContent = filtrado ? `${rotulo(lista.length)} de ${veiculos.length}` : rotulo(lista.length);
+  limpar.hidden = !filtrado;
   if (!lista.length) {
     grade.innerHTML = '';
-    carregando.textContent = 'Nenhum veículo encontrado.';
+    carregando.textContent = 'Nenhum veículo encontrado com esses filtros.';
     carregando.hidden = false;
     return;
   }
@@ -46,9 +56,26 @@ function lerFiltros() {
   };
 }
 
+function temFiltro(f) {
+  return Object.values(f).some((v) => String(v ?? '').trim() !== '');
+}
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  render(filterVehicles(veiculos, lerFiltros()));
+  const f = lerFiltros();
+  render(filterVehicles(veiculos, f), temFiltro(f));
+  document.getElementById('estoque').scrollIntoView({ block: 'start' });
+});
+
+limpar.addEventListener('click', () => {
+  form.reset();
+  render(veiculos);
+});
+
+maisFiltros.addEventListener('click', () => {
+  const aberta = form.classList.toggle('aberta');
+  maisFiltros.setAttribute('aria-expanded', String(aberta));
+  maisFiltros.firstChild.textContent = aberta ? 'Menos filtros ' : 'Mais filtros ';
 });
 
 async function iniciar() {
@@ -58,7 +85,10 @@ async function iniciar() {
     render(veiculos);
   } catch (err) {
     console.error(err);
-    carregando.textContent = 'Não foi possível carregar os veículos. Tente novamente.';
+    grade.innerHTML = '';
+    contagem.textContent = '';
+    carregando.textContent = 'Não foi possível carregar os veículos. Atualize a página para tentar de novo.';
+    carregando.hidden = false;
   }
 }
 
